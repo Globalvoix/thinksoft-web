@@ -67,15 +67,7 @@ export const DOWNLOADS: Download[] = [
     artifact: "mac-arm64.dmg",
     size: 233759656,
   },
-  {
-    id: "mac-arm64-zip",
-    platform: "macos",
-    title: "Apple Silicon (.zip)",
-    hint: "M1, M2, M3, M4 · .zip",
-    detail: "Apple Silicon (.zip)",
-    artifact: "mac-arm64.zip",
-    size: 225447288,
-  },
+
   {
     id: "mac-x64-dmg",
     platform: "macos",
@@ -85,15 +77,7 @@ export const DOWNLOADS: Download[] = [
     artifact: "mac-x64.dmg",
     size: 245709164,
   },
-  {
-    id: "mac-x64-zip",
-    platform: "macos",
-    title: "Intel 64-bit (.zip)",
-    hint: "x86_64 · .zip",
-    detail: "Intel (.zip)",
-    artifact: "mac-x64.zip",
-    size: 237318742,
-  },
+
   {
     id: "linux-x64-appimage",
     platform: "linux",

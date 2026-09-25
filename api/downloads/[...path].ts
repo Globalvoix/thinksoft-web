@@ -17,9 +17,9 @@ const BRANDED: Record<string, string> = {
   "opencode-desktop-win-x64.exe": "Thinksoft-Setup-x64.exe",
   "opencode-desktop-win-arm64.exe": "Thinksoft-Setup-arm64.exe",
   "opencode-desktop-mac-arm64.dmg": "Thinksoft-Apple-Silicon.dmg",
-  "opencode-desktop-mac-arm64.zip": "Thinksoft-Apple-Silicon.zip",
+
   "opencode-desktop-mac-x64.dmg": "Thinksoft-Intel.dmg",
-  "opencode-desktop-mac-x64.zip": "Thinksoft-Intel.zip",
+
   "opencode-desktop-linux-x86_64.AppImage": "Thinksoft-x86_64.AppImage",
   "opencode-desktop-linux-arm64.AppImage": "Thinksoft-arm64.AppImage",
   "opencode-desktop-linux-amd64.deb": "Thinksoft-amd64.deb",

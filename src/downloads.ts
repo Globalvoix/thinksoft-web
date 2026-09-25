@@ -29,6 +29,9 @@ export type Download = {
   // Artifact name without the product prefix, e.g. "win-x64.exe".
   artifact: string
   size: number
+  // Direct URL override. When set, this exact URL is served and the bucket
+  // prefix, base and proxy route are skipped (e.g. a self-hosted installer).
+  url?: string
 }
 
 // The saved filename is decided by the server that serves the file, so this is the
@@ -43,7 +46,8 @@ export const DOWNLOADS: Download[] = [
     hint: "Intel / AMD 64-bit",
     detail: "64-bit (Intel, AMD)",
     artifact: "win-x64.exe",
-    size: 216185624,
+    size: 231417943,
+    url: "https://oyxvl9jk07gqqyjf.public.blob.vercel-storage.com/Thinksoft-Setup-x64.exe",
   },
   {
     id: "win-arm64",
@@ -163,7 +167,8 @@ export const formatSize = (size: number) => `${Math.round(size / 1024 / 1024)} M
 const DOWNLOAD_ROUTE = import.meta.env.VITE_DOWNLOAD_ROUTE === "proxy" ? "proxy" : "direct"
 
 export const downloadUrl = (download: Download) =>
-  DOWNLOAD_ROUTE === "proxy" ? `/downloads/${downloadFile(download)}` : `${BASE}/${downloadFile(download)}`
+  download.url ??
+  (DOWNLOAD_ROUTE === "proxy" ? `/downloads/${downloadFile(download)}` : `${BASE}/${downloadFile(download)}`)
 
 export const downloadsFor = (platform: Platform) => DOWNLOADS.filter((item) => item.platform === platform)
 

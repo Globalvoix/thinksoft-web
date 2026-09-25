@@ -5,8 +5,8 @@
 // name (opencode-desktop-win-x64.exe). This route renames it without buffering, so a
 // 200 MB installer still streams and range requests keep working.
 //
-// Vercel Edge Function. The site only uses it when built with
-// VITE_DOWNLOAD_ROUTE=proxy; the default links straight at the bucket.
+// Vercel Edge Function, reached at /api/downloads/<artifact>. The site only uses it
+// when built with VITE_DOWNLOAD_ROUTE=proxy; the default links straight at the bucket.
 // Configure with DOWNLOAD_ORIGIN and DOWNLOAD_VERSION (see README).
 
 const ORIGIN = "https://opencode.ai"
@@ -30,14 +30,14 @@ const BRANDED: Record<string, string> = {
 
 export const config = { runtime: "edge" }
 
-export default async function handler(request: Request, context: { params: Record<string, string | string[]> }) {
-  const raw = context.params.path
-  const artifact = Array.isArray(raw) ? raw.join("/") : (raw ?? "")
+export default async function handler(request: Request): Promise<Response> {
+  const url = new URL(request.url)
+  const artifact = decodeURIComponent(url.pathname.replace(/^\/api\/downloads\//, "").replace(/^\/+/, ""))
   const name = BRANDED[artifact]
   // Only the known installers are proxied, so this cannot become an open relay.
-  if (!name) return new Response("Not found", { status: 404 })
+  if (!name || artifact.includes("..")) return new Response("Not found", { status: 404 })
 
-  const origin = process.env.DOWNLOAD_ORIGIN ?? ORIGIN
+  const origin = (process.env.DOWNLOAD_ORIGIN ?? ORIGIN).replace(/\/$/, "")
   const version = process.env.DOWNLOAD_VERSION ?? VERSION
   const range = request.headers.get("range")
 

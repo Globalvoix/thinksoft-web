@@ -37,8 +37,8 @@ export default async function handler(request: Request): Promise<Response> {
   // Only the known installers are proxied, so this cannot become an open relay.
   if (!name || artifact.includes("..")) return new Response("Not found", { status: 404 })
 
-  const origin = (process.env.DOWNLOAD_ORIGIN ?? ORIGIN).replace(/\/$/, "")
-  const version = process.env.DOWNLOAD_VERSION ?? VERSION
+  const origin = (process.env.DOWNLOAD_ORIGIN || ORIGIN).replace(/\/$/, "")
+  const version = process.env.DOWNLOAD_VERSION || VERSION
   const range = request.headers.get("range")
 
   const upstream = await fetch(`${origin}/files/bin/${version}/${artifact}`, {

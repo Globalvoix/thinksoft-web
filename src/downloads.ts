@@ -6,11 +6,11 @@
 // `opencode-desktop-` prefix, so the prefix is configurable: keep the default until a
 // Thinksoft-named release exists at the base URL, then set
 // VITE_ARTIFACT_PREFIX=thinksoft-desktop (or nothing, once the default flips).
-export const DESKTOP_VERSION = import.meta.env.VITE_DESKTOP_VERSION ?? "2.0.16"
+export const DESKTOP_VERSION = import.meta.env.VITE_DESKTOP_VERSION || "2.0.16"
 
-const ARTIFACT_PREFIX = import.meta.env.VITE_ARTIFACT_PREFIX ?? "opencode-desktop"
+const ARTIFACT_PREFIX = import.meta.env.VITE_ARTIFACT_PREFIX || "opencode-desktop"
 
-const BASE = (import.meta.env.VITE_DOWNLOAD_BASE_URL ?? `https://opencode.ai/files/bin/${DESKTOP_VERSION}/`).replace(
+const BASE = (import.meta.env.VITE_DOWNLOAD_BASE_URL || `https://opencode.ai/files/bin/${DESKTOP_VERSION}/`).replace(
   /\/$/,
   "",
 )

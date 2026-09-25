@@ -168,7 +168,7 @@ const DOWNLOAD_ROUTE = import.meta.env.VITE_DOWNLOAD_ROUTE === "proxy" ? "proxy"
 
 export const downloadUrl = (download: Download) =>
   download.url ??
-  (DOWNLOAD_ROUTE === "proxy" ? `/downloads/${downloadFile(download)}` : `${BASE}/${downloadFile(download)}`)
+  (DOWNLOAD_ROUTE === "proxy" ? `/api/downloads/${downloadFile(download)}` : `${BASE}/${downloadFile(download)}`)
 
 export const downloadsFor = (platform: Platform) => DOWNLOADS.filter((item) => item.platform === platform)
 
